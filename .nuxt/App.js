@@ -5,7 +5,7 @@ import '..\\node_modules\\@fortawesome\\fontawesome-free\\css\\all.css'
 
 import '..\\assets\\app.css'
 
-import '..\\node_modules\\vuetify\\src\\styles\\main.sass'
+import '..\\node_modules\\vuetify\\dist\\vuetify.css'
 
 import _6f6c098b from '..\\layouts\\default.vue'
 
@@ -102,6 +102,8 @@ export default {
     },
 
     setLayout(layout) {
+      if(layout && typeof layout !== 'string') throw new Error('[nuxt] Avoid using non-string value as layout property.')
+
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }

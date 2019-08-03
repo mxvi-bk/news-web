@@ -18,17 +18,6 @@ export default {
       articles: state => state.articles
     })
   },
-  created() {
-    if (process.browser) {
-      window.addEventListener("scroll", this.handleScroll);
-    }
-  },
-  mounted() {},
-  destroyed() {
-    if (process.browser) {
-      window.removeEventListener("scroll", this.handleScroll);
-    }
-  },
   methods: {
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
       console.log('object');
