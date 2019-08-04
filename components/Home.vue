@@ -40,7 +40,7 @@ export default {
       return !this.articles || this.articles.length === 0;
     },
     showLoadMore() {
-      return this.$route.name === 'index' && this.articles.length > 0
+      return this.$route.name === "index" && this.articles.length > 0;
     },
     title() {
       return this.$route.name === "history" ? "History" : "Home";
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchArticle: "article/FETCH_ARTICLES" 
+      fetchArticle: "article/FETCH_ARTICLES"
     }),
     async loadMore() {
       const page = this.page + 1;

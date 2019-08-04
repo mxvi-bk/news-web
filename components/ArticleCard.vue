@@ -22,13 +22,20 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn text color="orange" :href="article.url" target="blank" @click="clickHandler" width="100%">Explore</v-btn>
+      <v-btn
+        text
+        color="orange"
+        :href="article.url"
+        target="blank"
+        @click="clickHandler"
+        width="100%"
+      >Explore</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
   props: {
@@ -39,13 +46,13 @@ export default {
   },
   computed: {
     publishedAt() {
-      let date = new Date(this.article.publishedAt)
-      return date.toUTCString()
+      let date = new Date(this.article.publishedAt);
+      return date.toUTCString();
     }
   },
   methods: {
     ...mapActions({
-      addHistory: 'history/ADD_HISTORY'
+      addHistory: "history/ADD_HISTORY"
     }),
     clickHandler() {
       const article = this.article;

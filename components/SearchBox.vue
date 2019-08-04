@@ -14,7 +14,7 @@
 <script>
 import _ from "lodash";
 import { mapActions } from "vuex";
-import config from '~/configs'
+import config from "~/configs";
 
 export default {
   data() {
@@ -37,15 +37,15 @@ export default {
     }),
     async fetchArticle() {
       let vm = this;
-      let q = _.trim(vm.search)  
+      let q = _.trim(vm.search);
 
-      if(q === '') q = config.DEFAULT_KEYWORD
-      vm.loading = true
+      if (q === "") q = config.DEFAULT_KEYWORD;
+      vm.loading = true;
       await this.fetchArticleStore({
         q,
         page: 1
       });
-      vm.loading = false
+      vm.loading = false;
     }
   }
 };
