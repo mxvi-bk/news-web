@@ -22,7 +22,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn text color="orange" :href="article.url" target="blank" @click="clickHandler">Explore</v-btn>
+      <v-btn text color="orange" :href="article.url" target="blank" @click="clickHandler" width="100%">Explore</v-btn>
     </v-card-actions>
   </v-card>
 </template>
