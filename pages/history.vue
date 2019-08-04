@@ -4,21 +4,20 @@
 
 <script>
 import Home from "~/components/Home";
-import { mapState } from 'vuex'
-import Config from '~/configs'
+import { mapState } from "vuex";
+import Config from "~/configs";
 export default {
   components: {
     Home
-  },  
+  },
   computed: {
-    ...mapState('history', {
+    ...mapState("history", {
       articles: state => state.history
     })
   },
-  mounted() {
-  }, 
+  mounted() {},
   async fetch({ $axios, store }) {
-    await store.dispatch('history/FETCH_HISTORY')
+    await store.dispatch("history/FETCH_HISTORY");
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <Home :articles="articles" @scroll="onScroll"></Home>
+  <Home :articles="articles"></Home>
 </template>
 
 <script>
@@ -11,23 +11,12 @@ export default {
     Home
   },
   async fetch({ $axios, store }) {
-    await store.dispatch("article/FETCH_ARTICLES", { q: "bitcoin" });
+    await store.dispatch("article/FETCH_ARTICLES", { q: "bitcoin", page: 1 });
   },
   computed: {
     ...mapState("article", {
       articles: state => state.articles
     })
-  },
-  methods: {
-    onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
-      console.log('object');
-      if (scrollTop + clientHeight >= scrollHeight) {
-        // this.loadMorePosts()
-        alert('ok')
-      }
-    },
-    handleScroll() {
-    }
   }
 };
 </script>
