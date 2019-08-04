@@ -1,22 +1,3 @@
-const state = () => ({
-  history: []
-});
-
-const getters = {
-  history(state) {
-    return state.history;
-  }
-};
-
-const mutations = {
-  UPDATE_HISTORY(state, payload) {
-    state.history = payload.history;
-  },
-  DEL_HISTORY(state, payload) {
-    state.history.splice(payload.index);
-  }
-};
-
 const actions = {
   async FETCH_HISTORY({ commit, state }) {
     const history = JSON.parse(localStorage.getItem("history", state.history));
@@ -28,7 +9,7 @@ const actions = {
     let history = [article];
 
     if (stateHistory && stateHistory.length > 0) {
-      history = stateHistory.filter(art => art.url !== article.url);        
+      history = stateHistory.filter(art => art.url !== article.url);
       history.unshift(article);
     }
     commit("UPDATE_HISTORY", { history });
@@ -36,9 +17,4 @@ const actions = {
   }
 };
 
-export default {
-  state,
-  getters,
-  mutations,
-  actions
-};
+export default actions;

@@ -18,17 +18,33 @@ void (function updateModules() {
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('..\\store\\article.js'), 'article.js')
-  resolveStoreModules(require('..\\store\\history.js'), 'history.js')
+  resolveStoreModules(require('..\\store\\article\\index.js'), 'article/index.js')
+  resolveStoreModules(require('..\\store\\history\\index.js'), 'history/index.js')
+  resolveStoreModules(require('..\\store\\article\\mutations.js'), 'article/mutations.js')
+  resolveStoreModules(require('..\\store\\article\\state.js'), 'article/state.js')
+  resolveStoreModules(require('..\\store\\article\\getters.js'), 'article/getters.js')
+  resolveStoreModules(require('..\\store\\history\\getters.js'), 'history/getters.js')
+  resolveStoreModules(require('..\\store\\article\\actions.js'), 'article/actions.js')
+  resolveStoreModules(require('..\\store\\history\\mutations.js'), 'history/mutations.js')
+  resolveStoreModules(require('..\\store\\history\\state.js'), 'history/state.js')
+  resolveStoreModules(require('..\\store\\history\\actions.js'), 'history/actions.js')
 
   // If the environment supports hot reloading...
 
   if (process.client && module.hot) {
     // Whenever any Vuex module is updated...
     module.hot.accept([
-      '..\\store\\article.js',
-      '..\\store\\history.js',
       '..\\store\\index.js',
+      '..\\store\\article\\index.js',
+      '..\\store\\history\\index.js',
+      '..\\store\\article\\mutations.js',
+      '..\\store\\article\\state.js',
+      '..\\store\\article\\getters.js',
+      '..\\store\\history\\getters.js',
+      '..\\store\\article\\actions.js',
+      '..\\store\\history\\mutations.js',
+      '..\\store\\history\\state.js',
+      '..\\store\\history\\actions.js',
     ], () => {
       // Update `root.modules` with the latest definitions.
       updateModules()
