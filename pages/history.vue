@@ -10,14 +10,13 @@ export default {
   components: {
     Home
   },
+  async fetch({ $axios, store }) {
+    await store.dispatch("history/FETCH_HISTORY");
+  },
   computed: {
     ...mapState("history", {
       articles: state => state.history
     })
-  },
-  mounted() {},
-  async fetch({ $axios, store }) {
-    await store.dispatch("history/FETCH_HISTORY");
   }
 };
 </script>

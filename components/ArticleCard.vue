@@ -12,7 +12,7 @@
     </v-img>
 
     <v-card-text>
-      <span>{{ article.publishedAt }}</span>
+      <span>{{ publishedAt }}</span>
       <br />
       <span class="text--primary">
         <i>{{ article.source.name}}</i>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
     article: {
@@ -35,11 +37,19 @@ export default {
       required: true
     }
   },
-  mounted() {},
+  computed: {
+    publishedAt() {
+      let date = new Date(this.article.publishedAt)
+      return date.toUTCString()
+    }
+  },
   methods: {
+    ...mapActions({
+      addHistory: 'history/ADD_HISTORY'
+    }),
     clickHandler() {
       const article = this.article;
-      this.$store.dispatch("history/ADD_HISTORY", { article });
+      this.addHistory({ article });
     }
   }
 };

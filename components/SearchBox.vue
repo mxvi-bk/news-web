@@ -7,17 +7,20 @@
       single-line
       v-model="search"
     ></v-text-field>
+    <v-icon v-show="loading">fas fa-circle-notch fa-spin</v-icon>
   </v-toolbar>
 </template>
 
 <script>
 import _ from "lodash";
-import { clone } from "@babel/types";
+import { mapActions } from "vuex";
+import config from '~/configs'
 
 export default {
   data() {
     return {
-      search: ""
+      search: "",
+      loading: false
     };
   },
   watch: {
@@ -29,15 +32,20 @@ export default {
     this.debouncedFetchArticle = _.debounce(this.fetchArticle, 500);
   },
   methods: {
+    ...mapActions({
+      fetchArticleStore: "article/FETCH_ARTICLES"
+    }),
     async fetchArticle() {
-      var vm = this;
+      let vm = this;
+      let q = _.trim(vm.search)  
 
-      await this.$store.dispatch("article/FETCH_ARTICLES", {
-        q: vm.search,
+      if(q === '') q = config.DEFAULT_KEYWORD
+      vm.loading = true
+      await this.fetchArticleStore({
+        q,
         page: 1
       });
-
-      this.$route.query.q = vm.search;
+      vm.loading = false
     }
   }
 };

@@ -1,14 +1,16 @@
 <template>
   <v-container fluid grid-list-xl>
+    <h1>{{ title }}</h1>
     <v-layout row>
       <v-flex xs12 sm8 md4 v-for="(article, key) in articles" :key="key">
         <article-card :article="article"></article-card>
       </v-flex>
     </v-layout>
     <v-layout row align-center justify-center>
-      <v-btn @click="loadMore" v-if="$route.name === 'index'">
+      <v-alert v-if="showAlert" type="info">No article found.</v-alert>
+      <v-btn @click="loadMore" v-if="showLoadMore">
         Load more
-        <v-icon v-if="loading">fas fa-circle-notch fa-spin</v-icon>
+        <v-icon v-show="loading">fas fa-circle-notch fa-spin</v-icon>
       </v-btn>
     </v-layout>
   </v-container>
@@ -17,7 +19,7 @@
  <script>
 import ArticleCard from "~/components/ArticleCard";
 import SearchBox from "~/components/SearchBox";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
@@ -26,13 +28,23 @@ export default {
   },
   props: {
     articles: {
-      type: Array
+      type: Array,
+      default: []
     }
   },
   computed: {
     ...mapState("article", {
       page: state => state.page
-    })
+    }),
+    showAlert() {
+      return !this.articles || this.articles.length === 0;
+    },
+    showLoadMore() {
+      return this.$route.name === 'index' && this.articles.length > 0
+    },
+    title() {
+      return this.$route.name === "history" ? "History" : "Home";
+    }
   },
   data() {
     return {
@@ -40,10 +52,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      fetchArticle: "article/FETCH_ARTICLES" 
+    }),
     async loadMore() {
       const page = this.page + 1;
       this.loading = true;
-      await this.$store.dispatch("article/FETCH_ARTICLES", { page });
+      await this.fetchArticle({ page });
       this.loading = false;
     }
   }
