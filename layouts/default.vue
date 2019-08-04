@@ -16,8 +16,8 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-layout row v-if="$route.name === 'index'">
-        <v-flex xs8 offset-xs4>
+      <v-layout row v-if="$route.name === 'index'" width="50%">
+        <v-flex>
           <search-box />
         </v-flex>
       </v-layout>
